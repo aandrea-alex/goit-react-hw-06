@@ -1,5 +1,7 @@
 import { useId } from 'react';
+import { useDispatch } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { addItem } from '../../redux/contactsSlice';
 
 import { INITIAL_CONTACT } from '../../js/constants';
 import { FeedbackSchema } from '../../js/schema';
@@ -8,14 +10,16 @@ import { LABEL_NAME, LABEL_PHONE, CAPTION_ADD } from '../../js/constants';
 import CustomButton from '../CustomButton/CustomButton';
 import styles from './ContactForm.module.css';
 
-const ContactForm = ({ onAddContact }) => {
+const ContactForm = () => {
   const nameId = useId();
   const phoneId = useId();
+ const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
-    onAddContact(values);
+    dispatch(addItem(values));
     actions.resetForm();
   };
+
 
   return (
     <Formik
