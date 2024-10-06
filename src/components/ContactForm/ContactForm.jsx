@@ -1,7 +1,7 @@
 import { useId } from 'react';
 import { useDispatch } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { addItem } from '../../redux/contactsSlice';
+import { addContact } from '../../redux/contactsSlice';
 
 import { INITIAL_CONTACT } from '../../js/constants';
 import { FeedbackSchema } from '../../js/schema';
@@ -13,10 +13,10 @@ import styles from './ContactForm.module.css';
 const ContactForm = () => {
   const nameId = useId();
   const phoneId = useId();
- const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
-    dispatch(addItem(values));
+    dispatch(addContact(values));
     actions.resetForm();
   };
 

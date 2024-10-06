@@ -6,7 +6,7 @@ const contactsSlice = createSlice({
     items: [],
   },
   reducers: {
-    addItem: {
+    addContact: {
       reducer(state, action) {
         state.items.push(action.payload);
       },
@@ -19,13 +19,12 @@ const contactsSlice = createSlice({
         };
       },
     },
-    deleteItem(state, action) {
+    deleteContact(state, action) {
       const index = state.items.findIndex(task => task.id === action.payload);
       state.items.splice(index, 1);
     },
   },
 });
 
-export const { addItem, deleteItem } = contactsSlice.actions;
+export const { addContact, deleteContact } = contactsSlice.actions;
 export default contactsSlice.reducer;
-

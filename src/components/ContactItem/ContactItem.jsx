@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { FaUser, FaPhone } from 'react-icons/fa';
-import { deleteItem } from '../../redux/contactsSlice';
+import { deleteContact } from '../../redux/contactsSlice';
 import CustomButton from '../CustomButton/CustomButton';
 import { CAPTION_DELETE } from '../../js/constants';
 import styles from './ContactItem.module.css';
@@ -10,7 +10,7 @@ const ContactItem = ({ contact: { id, name, number } }) => {
   const dispatch = useDispatch();
 
   const handleDeleteItem = () => {
-    dispatch(deleteItem(id));
+    dispatch(deleteContact(id));
   };
 
   return (
