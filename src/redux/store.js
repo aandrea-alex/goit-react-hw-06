@@ -10,8 +10,9 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-import storage from 'redux-persist/lib/storage';
-import { rootReducer } from './rootReducer';
+import storage from "redux-persist/lib/storage";
+import contactsReducer from "./contactsSlice";
+import filtersReducer from "./filtersSlice";
 
 const persistConfig = {
   key: 'contacts',
@@ -19,11 +20,14 @@ const persistConfig = {
   whitelist: ['items'],
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, contactsReducer);
 
-export const store = configureStore({
+const store = configureStore({
   // https://redux-toolkit.js.org/usage/usage-guide#working-with-non-serializable-data
-  reducer: persistedReducer,
+  reducer: {
+    contacts: persistedReducer,
+    filters: filtersReducer,
+  },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
@@ -32,4 +36,5 @@ export const store = configureStore({
     }),
 });
 
-export const persistor = persistStore(store);
+const persistor = persistStore(store);
+export { store, persistor };
