@@ -1,11 +1,20 @@
-import styles from './ContactItem.module.css';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { FaUser, FaPhone } from 'react-icons/fa';
+import { deleteItem } from '../../redux/contactsSlice';
 import CustomButton from '../CustomButton/CustomButton';
 import { CAPTION_DELETE } from '../../js/constants';
+import styles from './ContactItem.module.css';
 
-const ContactItem = ({ contact: { id, name, number }, onDeleteContact }) => {
+const ContactItem = ({ contact: { id, name, number } }) => {
+  const dispatch = useDispatch();
+
+  const handleDeleteItem = () => {
+    dispatch(deleteItem(id));
+  };
+
   return (
-    <>
+    <React.Fragment>
       <div className={styles.info}>
         <p className={styles.name}>
           <FaUser /> {name}
@@ -14,10 +23,10 @@ const ContactItem = ({ contact: { id, name, number }, onDeleteContact }) => {
           <FaPhone /> {number}
         </p>
       </div>
-      <CustomButton onClick={() => onDeleteContact(id)} typeBtn={'button'}>
+      <CustomButton onClick={handleDeleteItem} typeBtn={'button'}>
         {CAPTION_DELETE}
       </CustomButton>
-    </>
+    </React.Fragment>
   );
 };
 
